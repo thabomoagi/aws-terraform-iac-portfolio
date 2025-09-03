@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thabo Moagi | Aspiring Cloud Solutions Architect</title>
+    <!-- Importing modern fonts from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Importing Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #3b82f6;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --lighter: #ffffff;
+            --accent: #f97316;
+            --accent-hover: #ea580c;
+            --text: #334155;
+            --text-light: #64748b;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Enhanced Animated Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* BOLD AND BEAUTIFUL LOGO */
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '⚡';
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .logo:hover::after {
+            opacity: 1;
+            animation: shine 1.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
+            color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .logo span {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--lighter);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+        }
+
+        header.scrolled .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Social Icons */
+        .header-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .header-social a {
+            color: var(--lighter);
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            padding: 0.6rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        header.scrolled .header-social a {
+            color: var(--dark);
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .header-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px) scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Animated Hero Background */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15rem 0 10rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out 0.2s both;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating elements animation */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatShape 15s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 30%;
+            left: 70%;
+            animation-delay: -6s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Modern Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Content Sections Styles */
+        .content-section {
+            background: var(--lighter);
+        }
+
+        .journey-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .challenge, .achievement {
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .challenge {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #ef4444;
+        }
+
+        .achievement {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+        }
+
+        .skills-section {
+            background: var(--darker);
+            color: white;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .journey-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .logo {
+                order: -1;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 10rem 0 6rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="mainHeader">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><span>THABO MOAGI</span></a>
+                <div class="nav-links">
+                    <a href="#journey">My Journey</a>
+                    <a href="#skills">My Skills</a>
+                    <a href="#project">The Project</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="header-social">
+                    <a href="https://www.linkedin.com/in/thabo-moagi-279b27152/" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/thabomoagi" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Aspiring Cloud Solutions Architect</h1>
+            <p class="hero-subtitle">
+                <span class="highlight">Final-Year Computer Science Student </span> | C++ | 
+                <span class="highlight"> & Qt Developer</span> | 
+                <span class="highlight">AWS Solutions Architect</span> Candidate
+            </p>
+            <div class="btn-group">
+                <a href="#contact" class="btn">
+                    <i class="fas fa-paper-plane"></i>Let's Connect
+                </a>
+                <a href="#project" class="btn btn-outline">
+                    <i class="fas fa-code"></i>View the Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Journey Section -->
+    <section id="journey" class="content-section">
+        <div class="container">
+            <h2>My Journey</h2>
+            <div class="journey-container">
+                <div class="challenge">
+                    <h3><i class="fas fa-target"></i>The Challenge</h3>
+                    <p>I set out to master cloud infrastructure by building a real-world solution from the ground up:</p>
+                    <ul>
+                        <li>Design and deploy cloud infrastructure <strong>from scratch</strong></li>
+                        <li>Implement <strong>Infrastructure as Code</strong> with Terraform</li>
+                        <li>Create a <strong>cost-optimized</strong> solution (AWS Free Tier)</li>
+                        <li>Understand the <strong>complete DevOps lifecycle</strong></li>
+                    </ul>
+                </div>
+                <div class="achievement">
+                    <h3><i class="fas fa-trophy"></i>The Achievement</h3>
+                    <p>I successfully engineered this scalable solution by:</p>
+                    <ul>
+                        <li><strong>Automating AWS</strong> with Terraform configurations</li>
+                        <li>Leveraging <strong>AWS S3</strong> for secure static hosting</li>
+                        <li>Implementing <strong>IAM policies</strong> for security</li>
+                        <li>Building a <strong>responsive portfolio website</strong></li>
+                    </ul>
+                    <p><strong>Outcome:</strong> A production-ready demo of IaC expertise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2>My Skills</h2>
+            <!-- Skills content will go here -->
+            <p style="text-align: center; color: white;">Cloud Infrastructure | Terraform Enthusiast | AWS | C++ | Qt Development | DevOps Practices</p>
+        </div>
+    </section>
+
+    <!-- The Project Section -->
+    <section id="project" class="content-section">
+        <div class="container">
+            <h2>The Project</h2>
+            <!-- Project content will go here -->
+            <p style="text-align: center;">This portfolio demonstrates modern Infrastructure as Code practices using Terraform and AWS.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact</h2>
+            <!-- Contact content will go here -->
+            <p style="text-align: center;">Ready to connect? Reach out to discuss cloud solutions and opportunities.</p>
+        </div>
+    </section>
+
+    <!-- JavaScript for header scroll effect and smooth scrolling -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
